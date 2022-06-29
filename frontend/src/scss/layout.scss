@@ -1,0 +1,19 @@
+.layout-container {
+    width: 100vw;
+    height: 100vh;
+    .menu-container {
+        height: 5vh;
+    }
+    .web-container {
+        display: flex;
+        height: 95vh;
+        .webbrowser-container {
+            height: 100%;
+            width: 75%;
+        }
+        .friendslist-container {
+            height: 100%;
+            width: 25%;
+        }
+    }
+}

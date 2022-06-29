@@ -1,0 +1,21 @@
+.layout-container {
+  width: 100vw;
+  height: 100vh;
+}
+.layout-container .menu-container {
+  height: 5vh;
+}
+.layout-container .web-container {
+  display: flex;
+  height: 95vh;
+}
+.layout-container .web-container .webbrowser-container {
+  height: 100%;
+  width: 75%;
+}
+.layout-container .web-container .friendslist-container {
+  height: 100%;
+  width: 25%;
+}
+
+/*# sourceMappingURL=layout.css.map */
