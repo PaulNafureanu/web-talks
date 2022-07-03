@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from django.db import models
 
 # Create your models here.
@@ -20,3 +21,12 @@ class Person(models.Model):
     country = models.CharField(max_length=127)
     date_birth = models.DateField()
 
+class Chat(models.Model):
+    chat_name = models.CharField(max_length=255, default=NULL, null=True)
+    persons = models.ManyToManyField(Person)
+
+class Message(models.Model):
+    text = models.TextField()
+    time_send = models.DateTimeField(auto_now_add=True)
+    person = models.ForeignKey(Person, on_delete=models.PROTECT)
+    chat = models.ForeignKey(Chat, on_delete=models.PROTECT)
