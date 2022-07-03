@@ -9,7 +9,7 @@ class Person(models.Model):
         ("O", "OTHERS")
     ]
 
-    profile_photo = models.ImageField()
+    # profile_photo = models.ImageField()
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
