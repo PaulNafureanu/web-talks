@@ -15,3 +15,8 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ["text", "time_send", "person", "chat"]
+
+class ChatHeaderSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    chat_name = serializers.CharField()
+    persons = serializers.PrimaryKeyRelatedField(queryset = Person.objects.all())

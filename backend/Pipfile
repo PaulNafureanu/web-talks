@@ -9,6 +9,7 @@ mysqlclient = "*"
 djangorestframework = "*"
 drf-nested-routers = "*"
 django-cors-headers = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

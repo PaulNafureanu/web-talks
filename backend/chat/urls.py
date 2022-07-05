@@ -1,3 +1,4 @@
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from .views import *
 
@@ -6,4 +7,9 @@ router.register("persons", PersonViewSet)
 router.register("chats", ChatViewSet)
 router.register("messages", MessageViewSet)
 
-urlpatterns = router.urls
+urlpatterns = [
+    path("", include(router.urls)),
+    path("chat-header", chat_header_list),
+    path("chat-header/<int:id_account>", chat_header_details)
+    # path("specific-messages")
+]
