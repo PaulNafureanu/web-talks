@@ -24,7 +24,7 @@ class Person(models.Model):
         return self.email
 
 class Chat(models.Model):
-    chat_name = models.CharField(max_length=255, default="", null=True)
+    chat_name = models.CharField(max_length=255, default="", null=True, blank=True)
     persons = models.ManyToManyField(Person)
 
     def __str__(self) -> str:
@@ -33,5 +33,6 @@ class Chat(models.Model):
 class Message(models.Model):
     text = models.TextField()
     time_send = models.DateTimeField(auto_now_add=True)
+    read_by = models.ManyToManyField(Person, default="", blank=True, related_name="read_by")
     person = models.ForeignKey(Person, on_delete=models.PROTECT)
     chat = models.ForeignKey(Chat, on_delete=models.PROTECT)

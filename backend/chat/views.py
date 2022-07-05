@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -19,14 +20,11 @@ class MessageViewSet(ModelViewSet):
 
 @api_view()
 def chat_header_list(request):
-    # chats = Chat.objects.all()
-    # # serializer = ChatSerializer(chats)
-    # serializer = ChatHeaderSerializer(chats)
     return Response("ok")
 
 @api_view()
 def chat_header_details(request, id_account):
-    # chats = Chat.objects.values("id", "chat_name")
-    # serializer = ChatHeaderSerializer(chats)
-    # # serializer = ChatSerializer(chats)
-    return Response("ok")
+    chats = Person.objects.get(pk = id_account).chat_set.all()
+    serializer = ChatHeaderSerializer(chats, many = True)
+    # return render(request, "test.html", {"data":list(chats)})
+    return Response(serializer.data)

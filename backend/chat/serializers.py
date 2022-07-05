@@ -19,4 +19,4 @@ class MessageSerializer(serializers.ModelSerializer):
 class ChatHeaderSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     chat_name = serializers.CharField()
-    persons = serializers.PrimaryKeyRelatedField(queryset = Person.objects.all())
+    # persons = serializers.PrimaryKeyRelatedField(queryset = Person.objects.all())
