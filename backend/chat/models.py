@@ -1,7 +1,8 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
-class Person(models.Model):
+class Profile(models.Model):
 
     GENDER_CHOICE = [
         ("M", "MALE"),
@@ -10,29 +11,39 @@ class Person(models.Model):
     ]
 
     # profile_photo = models.ImageField()
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    username = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=31)
     phone = models.CharField(max_length=15)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICE, default="M")
     country = models.CharField(max_length=127)
     date_birth = models.DateField()
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.email
+        return self.user.email
+
+    def username(self):
+        return self.user.username
+
+    def first_name(self):
+        return self.user.first_name
+
+    def last_name(self):
+        return self.user.last_name
+
+    def email(self):
+        return self.user.email
+    class Meta:
+        ordering = ["user__first_name", "user__last_name"]
+
+class ProfileChatDetails(models.Model):
+    profile = models.ManyToManyField(Profile)
+    last_time_active_on_chat = models.DateTimeField(auto_now=True)
+    chat_name = models.CharField(max_length=255, default="", null=True, blank=True)
 
 class Chat(models.Model):
-    chat_name = models.CharField(max_length=255, default="", null=True, blank=True)
-    persons = models.ManyToManyField(Person)
-
-    def __str__(self) -> str:
-        return self.chat_name
+    profile_chat_details_list = models.ForeignKey(ProfileChatDetails, on_delete=models.CASCADE)
 
 class Message(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     text = models.TextField()
     time_send = models.DateTimeField(auto_now_add=True)
-    read_by = models.ManyToManyField(Person, default="", blank=True, related_name="read_by")
-    person = models.ForeignKey(Person, on_delete=models.PROTECT)
-    chat = models.ForeignKey(Chat, on_delete=models.PROTECT)

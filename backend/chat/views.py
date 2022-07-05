@@ -6,28 +6,28 @@ from .models import *
 from .serializers import *
 
 # Create your views here.
-class PersonViewSet(ModelViewSet):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
+# class PersonViewSet(ModelViewSet):
+#     queryset = Person.objects.all()
+#     serializer_class = PersonSerializer
 
-class ChatViewSet(ModelViewSet):
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
+# class ChatViewSet(ModelViewSet):
+#     queryset = Chat.objects.all()
+#     serializer_class = ChatSerializer
 
-class MessageViewSet(ModelViewSet):
-    queryset = Message.objects.all()
-    serializer_class = MessageSerializer
+# class MessageViewSet(ModelViewSet):
+#     queryset = Message.objects.all()
+#     serializer_class = MessageSerializer
 
-@api_view()
-def chat_header_list(request):
-    return Response("ok")
+# @api_view()
+# def chat_header_list(request):
+#     return Response("ok")
 
-@api_view()
-def chat_header_details(request, id_account):
-    numberOfChats = Person.objects.only("id").get(pk = id_account).chat_set.count() #Returns a specific number like 3
-    chatNames = Person.objects.only("id").get(pk = id_account).chat_set.values("chat_name") #Returns a query set, specifically a list of chat name
-    
+# @api_view()
+# def chat_header_details(request, id_account):
+#     numberOfChats = Person.objects.only("id").get(pk = id_account).chat_set.count() #Returns a specific number like 3
+#     chatNames = Person.objects.only("id").get(pk = id_account).chat_set.values("chat_name") #Returns a query set, specifically a list of chat name
+
     # serializer = ChatHeaderSerializer(chats, many = True)
     # return render(request, "test.html", {"data":list(chats)})
-    return render(request, "test.html", {"chat_no":numberOfChats, "data": list(chatNames)})
+    # return render(request, "test.html", {"chat_no":numberOfChats, "data": list(chatNames)})
     # return Response(serializer.data)

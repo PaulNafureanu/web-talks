@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS web_talks;
+CREATE DATABASE web_talks;
