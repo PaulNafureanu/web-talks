@@ -24,7 +24,10 @@ def chat_header_list(request):
 
 @api_view()
 def chat_header_details(request, id_account):
-    chats = Person.objects.get(pk = id_account).chat_set.all()
-    serializer = ChatHeaderSerializer(chats, many = True)
+    numberOfChats = Person.objects.only("id").get(pk = id_account).chat_set.count() #Returns a specific number like 3
+    chatNames = Person.objects.only("id").get(pk = id_account).chat_set.values("chat_name") #Returns a query set, specifically a list of chat name
+    
+    # serializer = ChatHeaderSerializer(chats, many = True)
     # return render(request, "test.html", {"data":list(chats)})
-    return Response(serializer.data)
+    return render(request, "test.html", {"chat_no":numberOfChats, "data": list(chatNames)})
+    # return Response(serializer.data)
