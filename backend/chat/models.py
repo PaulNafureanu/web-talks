@@ -35,12 +35,14 @@ class Profile(models.Model):
         ordering = ["user__first_name", "user__last_name"]
 
 class ProfileChatDetails(models.Model):
-    profile = models.ManyToManyField(Profile)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     last_time_active_on_chat = models.DateTimeField(auto_now=True)
     chat_name = models.CharField(max_length=255, default="", null=True, blank=True)
+    class Meta:
+        verbose_name_plural = "Profile Chat Details"
 
 class Chat(models.Model):
-    profile_chat_details_list = models.ForeignKey(ProfileChatDetails, on_delete=models.CASCADE)
+    profile_chat_details_list = models.ManyToManyField(ProfileChatDetails)
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)

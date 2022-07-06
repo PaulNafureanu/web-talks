@@ -10,6 +10,8 @@ djangorestframework = "*"
 drf-nested-routers = "*"
 django-cors-headers = "*"
 django-debug-toolbar = "*"
+djoser = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from .models import *
 
-# class ProfileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Profile
-#         fields = ["first_name", "last_name", "email", "username", "password", "phone", "gender", "country", "date_birth"]
+class ProfileSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+    class Meta:
+        model = Profile
+        fields = ["id", "user_id", "phone", "gender", "country", "date_birth"]
 
 # class ChatSerializer(serializers.ModelSerializer):
 #     class Meta:
